@@ -4,7 +4,7 @@ const util = require("util");
 
 const orm = {
     selectAll: function (table, cb) {
-        return connection.query('SELECT * FROM ??', [table], function (err, res) {
+        return connection.query('SELECT * FROM ??', [table], function (err, data) {
             if (err) {
                 throw err;
             }

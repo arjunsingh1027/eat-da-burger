@@ -1,9 +1,13 @@
-<li>
-	{{name}}
-
-	<button class="change-sleep" data-id="{{id}}" data-newsleep="{{sleep}}">
-		{{#if sleep}}SLEEP TIME!{{else}}WAKE UP!{{/if}}
+<div class="row dataBlock d-flex flex-wrap mx-auto">
+	<div class="mainDiv text-center col: width of 15% border border-success">
+		<p>{{burger_name}}</p>
+	</div>
+	{{#if eaten}}
+	<button class="delete col: width of 15% mb-5" data-id="{{id}}">Delete From Table!
 	</button>
 
-	<button class="delete-cat" data-id="{{this.id}}">DELETE!</button>
-</li>
+	{{else}}
+	<button class="devour col: width of 15% mb-5" data-id="{{id}}">Devour It!
+	</button>
+	{{/if}}
+</div>
