@@ -44,7 +44,6 @@ const orm = {
 
     deleteBurger: function (table, id, cb){
         const query = 'DELETE FROM ?? WHERE id = ?';
-
         connection.query(query, [table, id], cb);
     }
 };
