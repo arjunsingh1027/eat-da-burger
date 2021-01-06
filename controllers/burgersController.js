@@ -15,7 +15,7 @@ router.get("/", function (req, res) {
 // add new data
 router.post("/api/add-burgers", function (req, res) {
   const burger_name = req.body.burger_name;
-  burger.insertBurger(burger_name, function (result) {
+  burger.insertOne(burger_name, function (result) {
     res.json({ id: result.insertId });
     console.log("added burger");
   });
@@ -25,7 +25,7 @@ router.post("/api/add-burgers", function (req, res) {
 router.put("/api/eat-burgers/:id", function (req, res) {
   const id = req.params.id;
 
-  burger.updateBurger(true, id, function (result) {
+  burger.updateOne(true, id, function (result) {
     if (result.changedRows == 0) {
       return res.status(404).end();
     } else {
@@ -37,7 +37,7 @@ router.put("/api/eat-burgers/:id", function (req, res) {
 
 // delete data
 router.delete("/api/delete-burgers/:id", function (req, res) {
-  burger.deleteBurger(req.params.id, function (err, data){
+  burger.deleteOne(req.params.id, function (err, data){
     if (err) {
       res.status(500).end();
     } else if (data.affectedRows == 0){
