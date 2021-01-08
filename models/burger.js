@@ -10,22 +10,22 @@ const burger = {
     },
 
     // insert burger
-    insertOne: function (burger_name, cb) {
-        orm.insertOne("burgers", "burger_name", burger_name, function (res) {
+    insertOne: function (addon, cb) {
+        orm.insertOne("burgers", "burger_name", addon, function (res) {
             cb(res);
         });
     },
 
     // delete burger
-    deleteOne: function(condition, cb){
-        orm.deleteOne("burgers", condition, function(res){
+    deleteOne: function (condition, cb) {
+        orm.deleteOne("burgers", condition, function (res) {
             cb(res);
         });
     },
 
     // update burger
-    updateOne: function(condition, id, cb){
-        orm.updateOne("burgers", condition, id, function(res){
+    updateOne: function (colVal, id, cb) {
+        orm.updateOne(colVal, id, function (res) {
             cb(res);
         });
     }

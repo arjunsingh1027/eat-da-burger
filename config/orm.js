@@ -1,52 +1,37 @@
-// Import MySQL connection.
-const connection = require("./connection.js");
-const util = require("util");
+// Import MSQL connection
+var connection = require("../config/connection.js");
 
-const orm = {
-    selectAll: function (table, cb) {
-        return connection.query('SELECT * FROM ??', [table], function (err, data) {
+// variable to set object relational mapping(orm)
+var orm = {
+    // function to select burgers from the list
+    selectAll: function(tableName, cb) {
+        var queryString = `SELECT * FROM ${tableName};`;
+        connection.query(queryString, function(err, result){
             if (err) {
                 throw err;
             }
-            cb(data);
+            cb(result);
         });
     },
-
-    insertBurger: function (table, columnName, burger_name, cb) {
-        const query = 'INSERT INTO ?? (??) VALUES (?)';
-
-        connection.query(
-            query,
-            [table, columnName, burger_name],
-            function (err, data) {
-                if (err){
-                    throw err;
-                }
-                cb(data);
-            }
-        );
+    // function to add a burger from user input
+    insertOne: function (tableName, cols, vals, cb) {
+        var queryString = `INSERT INTO ${tableName} (${cols}) VALUES ('${vals}');`;
+        connection.query(queryString, function(err, result){
+            if (err) {
+                throw err;
+            } 
+            cb(result);
+        });
     },
-
-    updateBurger: function (table, condition, id, cb) {
-        const query = 'UPDATE ?? SET eaten = ? WHERE id = ?';
-
-        connection.query(
-            query,
-            [table, condition, id],
-            function (err, data) {
-                if (err){
-                    throw err;
-                }
-                cb(data);
-            }
-        );
-    },
-
-    deleteBurger: function (table, id, cb){
-        const query = 'DELETE FROM ?? WHERE id = ?';
-        connection.query(query, [table, id], cb);
+    // function to update if the burger has been devoured or not
+    updateOne: function (colVal, id, cb) {
+        var queryString = `UPDATE burgers SET devoured='1' WHERE ${colVal}=${id}`;
+        connection.query(queryString, [id], function(err, result){
+            if (err) {
+                throw err;
+            } 
+            cb(result);
+        });
     }
-};
-
-// Export the orm object for the model (cat.js).
+}
 module.exports = orm;

@@ -1,5 +1,6 @@
+const express = require("express");
+const router = express.Router();
 const burger = require("../models/burger");
-const router = require("express").Router();
 
 
 // get all data
@@ -13,25 +14,21 @@ router.get("/", function (req, res) {
 });
 
 // add new data
-router.post("/api/add-burgers", function (req, res) {
-  const burger_name = req.body.burger_name;
-  burger.insertOne(burger_name, function (result) {
-    res.json({ id: result.insertId });
+router.post("/insertOne", function (req, res) {
+    burger.insertOne(req.body.burger_name, function (addon) {
+    res.redirect("/");
     console.log("added burger");
   });
 });
 
 // update data
 router.put("/api/eat-burgers/:id", function (req, res) {
-  const id = req.params.id;
-
-  burger.updateOne(true, id, function (result) {
-    if (result.changedRows == 0) {
-      return res.status(404).end();
-    } else {
-      res.status(200).end();
-      console.log("burger eaten");
-    }
+  router.post("/updateOne/:id", function (req, res) {
+    var colVal = "id";
+    var id = req.params.id;
+    burger.updateOne(colVal, id, function () {
+      res.redirect("/");
+    });
   });
 });
 
