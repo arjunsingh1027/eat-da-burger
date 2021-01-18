@@ -1,0 +1,21 @@
+<div class="row">
+    <div class="col-md-12">
+        <div class="card border border-danger">
+            <div class="card-header bg-danger text-white">
+                What would you like to eat?
+            </div>
+            {{!-- add burger form --}}
+            <div class="card-body">
+                <form action="" class="create-update-form" action="/insertOne" method="POST">
+                    <div class="form-group">
+                        <label for="burger">What burger would you like?</label>
+                        <input type="text" class="form-control" name="burger_name" id="eatBurger"
+                            placeholder="Write order here">
+                    </div>
+                    <button class="btn btn-danger" type="submit">Place order</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
